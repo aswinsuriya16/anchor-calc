@@ -32,7 +32,7 @@ fn process_instruction(
     accounts: &[AccountInfo],
     instruction_data: &[u8]
 ) -> ProgramResult {
-    
+
     let mut iter = accounts.iter();
     let data_account = next_account_info(&mut iter)?;
     
@@ -48,6 +48,7 @@ fn process_instruction(
             data.count = 1;
         },
         Instruction::Double => {
+            //saturating_mul , saturating_add ... to prevent overflow
             data.count = data.count.saturating_mul(2);
         },
         Instruction::Half => {
